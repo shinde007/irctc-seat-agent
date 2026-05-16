@@ -1,5 +1,6 @@
 package com.aditya.irctc_seat_agent.controller;
 
+import com.aditya.irctc_seat_agent.dto.ApiResponse;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,11 +10,17 @@ import java.util.Map;
 public class HealthController {
 
     @GetMapping("/api/health")
-    public Map<String, String> healthCheck() {
+    public ApiResponse<Map<String, String>> healthCheck() {
 
-        return Map.of(
+        Map<String, String> healthData = Map.of(
                 "status", "UP",
                 "service", "IRCTC Seat Agent"
+        );
+
+        return new ApiResponse<>(
+                true,
+                "Health check successful",
+                healthData
         );
     }
 }
